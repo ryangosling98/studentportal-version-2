@@ -163,7 +163,7 @@ def home(request):
 ```
 
 6. Update portal/templates/portal/profile.html:
-```html
+```htm
 {% extends 'portal/base.html' %}
 
 {% block content %}
