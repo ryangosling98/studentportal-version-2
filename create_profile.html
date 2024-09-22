@@ -1,0 +1,16 @@
+{% extends 'portal/base.html' %}
+<h2>Create Student Profile</h2>
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <label for="student_id">Student ID:</label>
+    <input type="text" name="student_id" required>
+    <label for="major">Major:</label>
+    <input type="text" name="major" required>
+    <label for="gpa">GPA:</label>
+    <input type="number" name="gpa" step="0.01">
+    <button type="submit">Create Profile</button>
+</form>
+{% endblock %}
