@@ -22,7 +22,7 @@ from . import views
 urlpatterns = [
     path('register/', views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='portal/login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('logout/', views.logout_view, name='logout'),  # Changed this line
     path('create_profile/', views.create_profile, name='create_profile'),
     path('profile/', views.profile, name='profile'),
     path('', views.home, name='home'),
@@ -108,10 +108,15 @@ class Notification(models.Model):
 5. Update portal/views.py:
 ```python
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegistrationForm
 from .models import StudentProfile, Notification
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, "You have been successfully logged out.")
+    return redirect('home')
 
 def register(request):
     if request.method == 'POST':
